@@ -5,6 +5,10 @@ pragma solidity ^0.8.9;
 // import "hardhat/console.sol";
 
 contract Contract {
-   bool public a = true;
-   bool public b;
+    bool public t = true;
+    bool public f;
+
+    uint8 public a;
+    uint16 public b = 257;
+    uint public sum = a + b;
 }
