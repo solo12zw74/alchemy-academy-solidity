@@ -50,7 +50,7 @@ describe('Contract', function () {
     const { contract } = await loadFixture(deployContract);
     const c = await contract.callStatic.c();
     const d = await contract.callStatic.d();
-    
+
     const cPositive = c > 0 && d < 0;
     const dPositive = d > 0 && c < 0;
     assert(cPositive || dPositive, "Declare variables c and d where one is positive (above zero) and the other is negative (below zero)");
@@ -64,4 +64,17 @@ describe('Contract', function () {
     assert.equal(difference, Math.abs(c - d));
   });
 
+  it('should create a msg1 as bytes32 with hello world', async () => {
+    const { contract } = await loadFixture(deployContract);
+    const msg1 = await contract.callStatic.msg1();
+    const ascii = ethers.utils.parseBytes32String(msg1);
+    assert(/hello world/i.test(ascii), "Could not find 'Hello World' in your msg1!");
+  });
+
+  it('should create a msg2 as string which requires more than 32 bytes', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    const msg2 = await contract.callStatic.msg2();
+    assert.isAtLeast(Buffer.byteLength(msg2, 'utf8'), 32);
+  });
 });

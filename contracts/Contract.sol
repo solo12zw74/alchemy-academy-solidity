@@ -16,4 +16,8 @@ contract Contract {
     int8 public d = -15;
 
     int8 public difference = c - d;
+
+    bytes32 public msg1 = "Hello World";
+    string public msg2 = "Here is the long string which requires more than 32 bytes to store it's value";
+
 }
