@@ -5,6 +5,13 @@ pragma solidity ^0.8.9;
 // import "hardhat/console.sol";
 
 contract Contract {
+    enum Foods {
+        Apple,
+        Pizza,
+        Bagel,
+        Banana
+    }
+    
     bool public t = true;
     bool public f;
 
@@ -18,6 +25,11 @@ contract Contract {
     int8 public difference = c - d;
 
     bytes32 public msg1 = "Hello World";
-    string public msg2 = "Here is the long string which requires more than 32 bytes to store it's value";
+    string public msg2 =
+        "Here is the long string which requires more than 32 bytes to store it's value";
 
+    Foods public food1 = Foods.Apple;
+    Foods public food2 = Foods.Banana;
+    Foods public food3 = Foods.Pizza;
+    Foods public food4 = Foods.Bagel;
 }

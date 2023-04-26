@@ -77,4 +77,13 @@ describe('Contract', function () {
     const msg2 = await contract.callStatic.msg2();
     assert.isAtLeast(Buffer.byteLength(msg2, 'utf8'), 32);
   });
+  
+  it('should create four foods', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    for (let i = 1; i <= 4; i++) {
+      const food = await contract.callStatic[`food${i}`]();
+      assert.isAtLeast(food, 0);
+    }
+  });
 });
