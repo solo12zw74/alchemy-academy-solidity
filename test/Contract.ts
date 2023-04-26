@@ -45,4 +45,23 @@ describe('Contract', function () {
     const sum = await contract.callStatic.sum();
     assert.equal(sum.toNumber(), a + b);
   });
+
+  it('should create two variables, one positive and one negative', async () => {
+    const { contract } = await loadFixture(deployContract);
+    const c = await contract.callStatic.c();
+    const d = await contract.callStatic.d();
+    
+    const cPositive = c > 0 && d < 0;
+    const dPositive = d > 0 && c < 0;
+    assert(cPositive || dPositive, "Declare variables c and d where one is positive (above zero) and the other is negative (below zero)");
+  });
+
+  it('should find the absolute difference between the two variables', async () => {
+    const { contract } = await loadFixture(deployContract);
+    const c = await contract.callStatic.c();
+    const d = await contract.callStatic.d();
+    const difference = await contract.callStatic.difference();
+    assert.equal(difference, Math.abs(c - d));
+  });
+
 });
