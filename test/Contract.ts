@@ -1,6 +1,7 @@
 import { expect, assert } from "chai";
 import { ethers } from "hardhat";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+import { Contract } from "ethers";
 const num = Math.floor(Math.random() * 1000);
 
 async function deployContract() {
@@ -127,4 +128,22 @@ describe('Contract', function () {
       assert.equal(x.toNumber(), num+2);
     });
   });
+});
+
+describe('Contract: add function', function () {
+    [[1, 3], [2, 4], [3, 7]].forEach(([x, y]) => {
+        const expectedSum = x + y;
+        describe(`when the contract is deployed with ${x}`, () => {
+            let contract: Contract;
+            before(async () => {
+                const Contract = await ethers.getContractFactory("Contract");
+                contract = await Contract.deploy(x);
+                await contract.deployed();
+            });
+            it(`it should add ${y} to get ${expectedSum}`, async () => { 
+                const sum = await contract.callStatic.add(y);
+                assert.equal(sum.toNumber(), expectedSum);
+            });
+        });
+    });
 });
