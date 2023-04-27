@@ -95,4 +95,36 @@ describe('Contract', function () {
     const x = await contract.callStatic.x();
     assert.equal(x, num);
   });
+  it('should set the initial value to num', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    const x = await contract.callStatic.x();
+    assert.equal(x.toNumber(), num);
+  });
+
+  describe('after one increment call', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    before(async () => {
+      await contract.increment();
+    });
+
+    it('should increase the value to num +1', async () => {
+      const x = await contract.callStatic.x();
+      assert.equal(x.toNumber(), num+1);
+    });
+  });
+
+  describe('after a second increment call', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    before(async () => {
+      await contract.increment();
+    });
+
+    it('should increase the value to 2', async () => {
+      const x = await contract.callStatic.x();
+      assert.equal(x.toNumber(), num+2);
+    });
+  });
 });

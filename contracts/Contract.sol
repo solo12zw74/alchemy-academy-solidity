@@ -38,4 +38,8 @@ contract Contract {
     constructor(uint _x) {
         x = _x;
     }
+
+    function increment() external {
+        x = x + 1;
+    }
 }
