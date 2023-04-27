@@ -47,7 +47,12 @@ contract Contract {
         result = x + value;
     }
 
-    function double(uint value) pure external returns (uint result) {
+    function double(uint value) pure public returns (uint result) {
         result = value * 2;
+    }
+
+    function double(uint value1, uint value2) pure public returns (uint result1, uint result2) {
+        result1 = double(value1);
+        result2 = double(value2);
     }
 }
