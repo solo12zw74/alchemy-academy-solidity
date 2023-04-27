@@ -1,10 +1,11 @@
 import { expect, assert } from "chai";
 import { ethers } from "hardhat";
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
+const num = Math.floor(Math.random() * 1000);
 
 async function deployContract() {
   const Contract = await ethers.getContractFactory("Contract");
-  const contract = await Contract.deploy();
+  const contract = await Contract.deploy(num);
   await contract.deployed();
   return { contract }
 }
@@ -77,7 +78,7 @@ describe('Contract', function () {
     const msg2 = await contract.callStatic.msg2();
     assert.isAtLeast(Buffer.byteLength(msg2, 'utf8'), 32);
   });
-  
+
   it('should create four foods', async () => {
     const { contract } = await loadFixture(deployContract);
 
@@ -85,5 +86,13 @@ describe('Contract', function () {
       const food = await contract.callStatic[`food${i}`]();
       assert.isAtLeast(food, 0);
     }
+  });
+
+
+  it('should create variable x with the number stored in it', async () => {
+    const { contract } = await loadFixture(deployContract);
+
+    const x = await contract.callStatic.x();
+    assert.equal(x, num);
   });
 });

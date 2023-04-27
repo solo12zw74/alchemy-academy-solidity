@@ -22,6 +22,8 @@ contract Contract {
     int8 public c = 10;
     int8 public d = -15;
 
+    uint public x;
+
     int8 public difference = c - d;
 
     bytes32 public msg1 = "Hello World";
@@ -32,4 +34,8 @@ contract Contract {
     Foods public food2 = Foods.Banana;
     Foods public food3 = Foods.Pizza;
     Foods public food4 = Foods.Bagel;
+
+    constructor(uint _x) {
+        x = _x;
+    }
 }
