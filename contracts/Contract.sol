@@ -46,4 +46,8 @@ contract Contract {
     function add(uint value) view external returns (uint result) {
         result = x + value;
     }
+
+    function double(uint value) pure external returns (uint result) {
+        result = value * 2;
+    }
 }
