@@ -10,4 +10,8 @@ contract InteractiveContract {
     constructor(uint _value) {
         value = _value;
     }
+
+    function modify(uint _value) external {
+        value = _value;
+    }
 }
