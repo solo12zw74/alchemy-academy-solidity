@@ -18,5 +18,5 @@ export async function setValue(contract: Contract) {
  * @return {promise} a promise of transaction modifying the `message`
  */
 export async function setMessage(contract: Contract, signer: Signer): Promise<void> {
-    return await contract.connect(signer).messagee('this is a new message')
+    return await contract.connect(signer).modifyMessage('this is a new message')
 }

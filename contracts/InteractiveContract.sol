@@ -18,7 +18,7 @@ contract InteractiveContract {
         value = _value;
     }
 
-    function messagee(string calldata _message) external {
+    function modifyMessage(string calldata _message) external {
         require(msg.sender != owner, "Owner cannot modify the message!");
         message = _message;
     }
